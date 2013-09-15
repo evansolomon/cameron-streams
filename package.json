@@ -1,0 +1,27 @@
+{
+  "name": "cameron-streams",
+  "version": "0.0.1",
+  "description": "Streams to help with testing other streams.",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt simplemocha",
+    "prepublish": "grunt coffee"
+  },
+  "author": {
+    "name": "Evan Solomon",
+    "email": "evan@evansolomon.me"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/evansolomon/servant-streams.git"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "should": "~1.3.0",
+    "mocha": "~1.12.1",
+    "grunt": "~0.4.1",
+    "coffee-script": "~1.6.3",
+    "grunt-simple-mocha": "~0.4.0",
+    "grunt-contrib-coffee": "~0.7.0"
+  }
+}
