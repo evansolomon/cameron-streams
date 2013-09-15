@@ -1,6 +1,6 @@
 # Cameron Streams
 
-[![Build Status](https://secure.travis-ci.org/evansolomon/cameron-streams.png?branch=master)](http://travis-ci.org/Obvious/canoe)
+[![Build Status](https://secure.travis-ci.org/evansolomon/cameron-streams.png?branch=master)](http://travis-ci.org/evansolomon/cameron-streams)
 
 Like Camerson Frye in Ferris Bueller's Day Off, these streams will do whatever stupid thing you want them to. In practice, this can be helpful, especially when testing other streams.
 
