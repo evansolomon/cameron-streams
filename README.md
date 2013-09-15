@@ -1,5 +1,7 @@
 # Cameron Streams
 
+[![Build Status](https://secure.travis-ci.org/evansolomon/cameron-streams.png?branch=master)](http://travis-ci.org/Obvious/canoe)
+
 Like Camerson Frye in Ferris Bueller's Day Off, these streams will do whatever stupid thing you want them to. In practice, this can be helpful, especially when testing other streams.
 
 > He'll keep calling me, he'll keep calling me until I come over. He'll make me feel guilty. This is uh... This is ridiculous, ok I'll go, I'll go, I'll go, I'll go, I'll go. What - I'LL GO. Shit.
