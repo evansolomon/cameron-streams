@@ -1,6 +1,7 @@
 module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-simple-mocha'
+  grunt.loadNpmTasks 'grunt-release'
 
   grunt.initConfig
     simplemocha:
