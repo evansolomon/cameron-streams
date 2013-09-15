@@ -8,6 +8,12 @@ Like Camerson Frye in Ferris Bueller's Day Off, these streams will do whatever s
 
 &mdash; [Cameron Frye](https://www.youtube.com/watch?feature=player_detailpage&v=rIqWSPUh2rY#t=176)
 
+## Install
+
+You know the drill.
+
+`npm install cameron-streams --save`
+
 ## Emitter
 
 A writable stream that does nothing but emit `write` events when data is written. Each event has a `chunk` argument. Otherwise, written data is ignored.
