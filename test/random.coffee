@@ -1,46 +1,51 @@
 should = require 'should'
 {Readable} = require 'stream'
 
-{random} = require '../'
+cameron = require '../'
 
-describe 'Random Stream', ->
-  describe 'Export', ->
-    it 'Should be a function', ->
-      random.should.be.instanceof Function
+# Random and encoded streams should pass the same tests
+for streamType in ['random', 'encoded']
+  className = streamType.charAt(0).toUpperCase() + streamType.slice(1)
+  stream = cameron[streamType]
 
-  describe 'Readable stream', ->
-    it 'Should be a readable stream', ->
-      random(0).should.be.instanceof Readable
+  describe "#{className} Stream", ->
+    describe 'Export', ->
+      it 'Should be a function', ->
+        stream.should.be.instanceof Function
 
-    it 'Should pass options to parent', ->
-      readable = random 0, {highWaterMark: 100}
-      readable._readableState.highWaterMark.should.equal 100
+    describe 'Readable stream', ->
+      it 'Should be a readable stream', ->
+        stream(0).should.be.instanceof Readable
 
-  describe 'Output chunks', ->
-    it 'Should produce instances of Buffer', (done) ->
-      readable = random 100
-      readable.on 'readable', ->
-        readable.read().should.be.instanceof Buffer
-        done()
+      it 'Should pass options to parent', ->
+        readable = stream 0, {highWaterMark: 100}
+        readable._readableState.highWaterMark.should.equal 100
 
-    it 'Should respect encoding', (done) ->
-      readable = random 100
-      readable.setEncoding 'utf8'
+    describe 'Output chunks', ->
+      it 'Should produce instances of Buffer', (done) ->
+        readable = stream 100
+        readable.on 'readable', ->
+          readable.read().should.be.instanceof Buffer
+          done()
 
-      readable.on 'readable', ->
-        readable.read().should.be.a 'string'
-        done()
+      it 'Should respect encoding', (done) ->
+        readable = stream 100
+        readable.setEncoding 'utf8'
 
-    it 'Should produce the correct number of bytes', (done) ->
-      numBytes = 500000
-      readable = random numBytes
+        readable.on 'readable', ->
+          readable.read().should.be.a 'string'
+          done()
 
-      dataRead = []
+      it 'Should produce the correct number of bytes', (done) ->
+        numBytes = Math.floor Math.random() * 500000
+        readable = stream numBytes
 
-      readable.on 'end', ->
-        Buffer.concat(dataRead).length.should.equal numBytes
-        done()
+        dataRead = []
 
-      readable.on 'readable', ->
-        while null != chunk = readable.read()
-          dataRead.push chunk
+        readable.on 'end', ->
+          Buffer.concat(dataRead).length.should.equal numBytes
+          done()
+
+        readable.on 'readable', ->
+          while null != chunk = readable.read()
+            dataRead.push chunk
