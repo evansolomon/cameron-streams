@@ -57,3 +57,5 @@ random.on 'end', ->
   console.log fs.statSync('./output').size
   # Prints 1,048,576 (1 mb)
 ```
+
+You can also get a random stream of more readable output using `cameron.encoded()`.  By default, the random bytes are hex encoded.
