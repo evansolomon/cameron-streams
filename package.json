@@ -1,6 +1,6 @@
 {
   "name": "cameron-streams",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Streams to help with testing other streams.",
   "main": "index.js",
   "scripts": {
