@@ -12,12 +12,33 @@ class RandomStream extends stream.Readable
     @bytesRead = 0
     super options
 
+  generateRandomChunk: (size) ->
+    crypto.randomBytes size
+
   _read: (size) ->
     size = Math.min size, @totalBytes - @bytesRead
     @bytesRead += size
 
-    @push crypto.randomBytes size
+    @push @generateRandomChunk size
     @push null if @bytesRead >= @totalBytes
+
+
+###
+A readable stream that provides random encoded characters. The encoding used
+can be overriden by setting `instance.encoding`.
+
+Set the total size of the random bytes provided across all "readable"
+events with the `totalBytes` argument (see parent class).
+###
+class RandomEncodedStream extends RandomStream
+  encoding: 'hex'
+
+  generateRandomChunk: (size) ->
+    # Each random byte is encoded as two hex characters, so limit the output
+    # to the expected size.
+    #
+    # Honestly, I just made this class so I could write `super(size)`
+    super(size).toString(@encoding).slice 0, size
 
 
 ###
@@ -51,6 +72,9 @@ class SlowStream extends stream.Writable
 module.exports =
   random: (size, options) ->
     new RandomStream size, options
+
+  encoded: (size, options) ->
+    new RandomEncodedStream size, options
 
   emitter: (options) ->
     new EmitterStream options
