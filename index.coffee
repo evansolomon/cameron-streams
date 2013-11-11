@@ -47,9 +47,6 @@ A Writable stream that emits "write" events for every write.
 Each "write" event has a chunk argument (the data written).
 ###
 class EmitterStream extends stream.Writable
-  constructor: (options) ->
-    super options
-
   _write: (chunk, encoding, cb) ->
     @emit 'write', chunk
     cb()
