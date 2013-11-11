@@ -7,7 +7,7 @@ A readable stream that provides random bytes.
 Set the total size of the random bytes provided across all "readable"
 events with the `totalBytes` argument.
 ###
-class RandomStream extends stream.Readable
+module.exports.RandomStream = class RandomStream extends stream.Readable
   constructor: (@totalBytes = 0, options) ->
     @bytesRead = 0
     super options
@@ -30,7 +30,7 @@ can be overriden by setting `instance.encoding`.
 Set the total size of the random bytes provided across all "readable"
 events with the `totalBytes` argument (see parent class).
 ###
-class RandomEncodedStream extends RandomStream
+module.exports.RandomEncodedStream = class RandomEncodedStream extends RandomStream
   encoding: 'hex'
 
   generateRandomChunk: (size) ->
@@ -46,7 +46,7 @@ A Writable stream that emits "write" events for every write.
 
 Each "write" event has a chunk argument (the data written).
 ###
-class EmitterStream extends stream.Writable
+module.exports.EmitterStream = class EmitterStream extends stream.Writable
   _write: (chunk, encoding, cb) ->
     @emit 'write', chunk
     cb()
@@ -57,7 +57,7 @@ A writable stream that ignores written data and delays the write callback.
 
 Set the callback delay with the `timeout` argument.
 ###
-class SlowStream extends stream.Writable
+module.exports.SlowStream = class SlowStream extends stream.Writable
   constructor: (@timeout = 0, options) ->
     super options
 
@@ -66,15 +66,14 @@ class SlowStream extends stream.Writable
 
 
 # Export the streams
-module.exports =
-  random: (size, options) ->
-    new RandomStream size, options
+module.exports.random = (size, options) ->
+  new RandomStream size, options
 
-  encoded: (size, options) ->
-    new RandomEncodedStream size, options
+module.exports.encoded = (size, options) ->
+  new RandomEncodedStream size, options
 
-  emitter: (options) ->
-    new EmitterStream options
+module.exports.emitter = (options) ->
+  new EmitterStream options
 
-  slow: (timeout, options) ->
-    new SlowStream timeout, options
+module.exports.slow = (timeout, options) ->
+  new SlowStream timeout, options
